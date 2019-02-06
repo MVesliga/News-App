@@ -1,0 +1,43 @@
+.navbar{
+    margin-bottom: 0px !important;
+}
+.forma{
+    margin-top: 50px;
+}
+.navbar-header a{
+    letter-spacing: 3px;
+    font-size: 25px;
+}
+
+ul li a{
+    display: block;
+    margin-right: 7px;
+    border-bottom: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 20px;
+    font-style: normal !important;
+}
+li:hover{
+    border-bottom: 3px solid #56a1cf;
+}
+.podkategorija{
+    padding-left: 8.78% !important;
+}
+
+html{
+	position:relative;
+	min-height:100%;
+}
+
+footer{
+    position:absolute;
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+    border-top: 2px solid #56a1cf;
+    padding: 20px 0px 20px 0px;
+    background-color: #213540;
+	bottom:0;
+	width:100%;
+}
