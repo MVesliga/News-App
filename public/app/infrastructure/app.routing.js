@@ -47,6 +47,18 @@ newsApp.config(function($stateProvider,$urlRouterProvider){
     }).state('register',{
         url:'/register',
         component:'register'
+    }).state('user-detail',{
+        url:'/users/:id',
+        component:'userDetail'
+    }).state('news-list',{
+        url:'/news',
+        component:'newsList'
+    }).state('add-news',{
+        url:'/addNews',
+        component:'addNews'
+    }).state('news-detail',{
+        url:'/:newsTitle',
+        component:'newsDetail'
     });
 
     $urlRouterProvider.otherwise('/');

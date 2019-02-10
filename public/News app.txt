@@ -1,26 +1,36 @@
-MySQL - entiteti - korisnici,kategorije vijesti,potkategorije, post.
+MySQL - entiteti - korisnici,kategorije vijesti,potkategorije, vijest, komentari.
 
 KORISNICI
 -id
--ime
--prezime
+-imeKorisnik
+-prezimeKorisnik
 -email
 -username
 -password
+-level
 
 KATEGORIJE
 -id
--naziv
--idPotkategorije
+-nazivKategorije
 
 POTKATEGORIJE
 -id
--naziv
+-nazivPotkategorije
+-idKategorije
 
 VIJEST
 -id
 -prioritet
--idKategorije
--Naslov
+-naslov
 -podnaslov
--sadržaj
+-sadrzajVijest
+-idKategorije
+-idPotkategorije
+-datumObjavljivanja
+
+KOMENTARI
+-id
+-idKorisnik
+-idVijest
+-sadrzajKomentar
+-datumObjavljivanja

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mysql = require('promise-mysql');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const config = require('./config');
 const pool = mysql.createPool(config.pool);
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname+'/public/app'));
 
+
+
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
@@ -22,10 +25,10 @@ app.use((req,res,next) => {
 });
 
 app.use(morgan('dev'));
-let authRouter = require('./app/routes/authenticate')(express,pool);
-app.use('/authenticate',authRouter);
-let apiRouter = require('./app/routes/api')(express,pool);
 
+/*let authRouter = require('./app/routes/authenticate')(express,pool,jwt,config.secret);
+app.use('/authenticate',authRouter);*/
+let apiRouter = require('./app/routes/api')(express,pool,jwt,config.secret);
 app.use('/api',apiRouter);
 
 app.get('/',(req,res) =>{

@@ -4,6 +4,7 @@ class AuthenticationService{
         this.http = $http;
         this.state = $state;
         this.rootScope = $rootScope;
+        this.url = '/api/users';
         this.user = null;
     }
 
@@ -22,13 +23,20 @@ class AuthenticationService{
         return this.user;
     }
 
+    getUserById(id){
+        this.http.get(`${this.url}/${id}`).then(d =>{
+            if(d.data.status == 'OK'){
+                this.user = d.data.user;
+            }
+        });
+    }
+
     login(credentials){
 
-        this.http.post('/authenticate',{credentials:credentials}).then(d => {
+        this.http.post('/api/login',{credentials:credentials}).then(d => {
 
 
             if (d.data.status=='OK'){
-
                 this.user=d.data.user;
                 sessionStorage.setItem('authenticated',true);
                 sessionStorage.setItem('user',JSON.stringify(this.user));

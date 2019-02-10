@@ -5,7 +5,8 @@ module.exports={
         host: 'localhost',
         user: 'root',
         password: 'pass',
-        database: 'njp',
+        database: 'newsappdatabase',
         debug: false
-    }
+    },
+    secret: 'nekidugackistringzakodiranjetokena'
 }
