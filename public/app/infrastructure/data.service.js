@@ -2,27 +2,35 @@ class DataService{
 
     constructor($http){
         this.http = $http;
-        this.url = '/api/news';
+        
     }
 
-    getData(){
-        return this.http.get(this.url,{cache:true});
+    getData(url){
+        return this.http.get(url,{cache:true});
     }
 
-    postData(vijest){
-        return this.http.post(this.url,{vijest:vijest}).then((d)=>{
-            if(d.data.status = 'OK'){
+    getDataByKategorija(url,kategorija){
+        return this.http.get(`${url}/${kategorija}`,{cache:true});
+    }
+
+    getDataById(url,idVijest){
+        return this.http.get(`${url}/${idVijest}`,{cache:true});
+    }
+
+    postData(url,podatak){
+        return this.http.post(url,{podatak:podatak}).then((d)=>{
+            if(d.data.status = 'OK' && url=='/api/news'){
                 alert('Vijest je dodana!');
             }
         });
     }
 
-    editData(vijest){
-        return this.http.put(this.url,{vijest:vijest});
+    editData(url,podatak){
+        return this.http.put(url,{podatak:podatak});
     }
 
-    deleteData(id){
-        return this.http.delete(`${this.url}/${id}`);
+    deleteData(url,id){
+        return this.http.delete(`${url}/${id}`);
     }
 }
 

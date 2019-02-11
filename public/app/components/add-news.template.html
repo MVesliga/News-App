@@ -29,24 +29,6 @@
                             </select>
                             <p ng-show="unos.kategorija.$invalid" class="help-block">Odaberite kategoriju!</p>
                         </fieldset>
-                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.potkategorija.$invalid}">
-                                <label>Potkategorija:</label>
-                                <select name="potkategorija" ng-model="c.vijest.potkategorija" required>
-                                        <option value="" selected disabled>Odaberi:</option>
-                                        <option value="1">Politika</option>
-                                        <option value="1">Svijet</option>
-                                        <option value="1">Kolumne</option>
-                                        <option disabled="disabled">--------------</option>
-                                        <option value="2">Nogomet</option>
-                                        <option value="2">Rukomet</option>
-                                        <option value="2">Kosarka</option>
-                                        <option disabled="disabled">--------------</option>
-                                        <option value="3">Internet</option>
-                                        <option value="3">Gaming</option>
-                                        <option value="3">Gadgets</option>
-                                </select>
-                                <p ng-show="unos.potkategorija.$invalid" class="help-block">Odaberite kategoriju!</p>
-                        </fieldset>
                         <fieldset class="form-group" ng-class="{ 'has-error' : unos.urlSlike.$invalid && !unos.urlSlike.$pristine }">
                                 <label>Url slike:</label>
                                 <input name="urlSlike" placeholder="Url slike" class="form-control" type="text" ng-model="c.vijest.urlSlike" required/>

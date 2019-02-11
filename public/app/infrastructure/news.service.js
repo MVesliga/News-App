@@ -6,7 +6,7 @@ class NewsService{
         this.state = $state;
         this.url = '/api/news';
 
-        this.dataService.getData().then((d) =>{
+        this.dataService.getData(this.url).then((d) =>{
             this.vijesti = d.data.vijesti;
             
             this.rootScope.$broadcast('init');
@@ -18,7 +18,7 @@ class NewsService{
     }
 
     addNews(vijest){
-        this.dataService.postData(vijest).then(d => {
+        this.dataService.postData(this.url,vijest).then(d => {
             this.vijesti.push(vijest);
             this.rootScope.$broadcast('modeChangee');
             this.state.go('news-list');
@@ -26,7 +26,7 @@ class NewsService{
     }
 
     editNews(vijest){
-        this.dataService.editData(vijest).then(d =>{
+        this.dataService.editData(this.url,vijest).then(d =>{
             let i = this.vijesti.findIndex(c => c.id == vijest.id);
             this.vijesti[i] = vijest;
             this.rootScope.$broadcast('modeChange');
@@ -34,7 +34,7 @@ class NewsService{
     }
 
     deleteNews(id){
-        this.dataService.deleteData(id).then(d=>{
+        this.dataService.deleteData(this.url,id).then(d=>{
             this.vijesti.splice(this.vijesti.findIndex(c => c.id == id),1);
         });
     }

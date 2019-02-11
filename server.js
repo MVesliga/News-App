@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mysql = require('promise-mysql');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const config = require('./config');
 const pool = mysql.createPool(config.pool);
@@ -28,7 +29,7 @@ app.use(morgan('dev'));
 
 /*let authRouter = require('./app/routes/authenticate')(express,pool,jwt,config.secret);
 app.use('/authenticate',authRouter);*/
-let apiRouter = require('./app/routes/api')(express,pool,jwt,config.secret);
+let apiRouter = require('./app/routes/api')(express,pool,jwt,config.secret,bcrypt);
 app.use('/api',apiRouter);
 
 app.get('/',(req,res) =>{

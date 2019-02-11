@@ -3,41 +3,14 @@ newsApp.config(function($stateProvider,$urlRouterProvider){
         url:'/',
         component:'home'   
     }).state('news',{
-        url:'/news',
+        url:'/:kategorija',
         component:'news'
-    }).state('politika',{
-        url:'/politika',
-        component:'politika'
-    }).state('svijet',{
-        url:'/svijet',
-        component:'svijet'
-    }).state('kolumne',{
-        url:'/kolumne',
-        component:'kolumne'
     }).state('sport',{
-        url:'/sport',
+        url:'/:kategorija',
         component:'sport'
-    }).state('nogomet',{
-        url:'/nogomet',
-        component:'nogomet'
-    }).state('rukomet',{
-        url:'/rukomet',
-        component:'rukomet'
-    }).state('kosarka',{
-        url:'/kosarka',
-        component:'kosarka'
     }).state('tech',{
-        url:'/tech',
+        url:'/:kategorija',
         component:'tech'
-    }).state('internet',{
-        url:'/internet',
-        component:'internet'
-    }).state('gaming',{
-        url:'/gaming',
-        component:'gaming'
-    }).state('gadgets',{
-        url:'/gadgets',
-        component:'gadgets'
     }).state('search',{
         url:'/search',
         component:'search'

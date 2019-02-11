@@ -1,15 +1,8 @@
 <div class="container">
         <div class="container">
             <h3>Podaci o korisniku:</h3>
-            <h3>{{c.user.imeKorisnik}} {{c.user.prezimeKorisnik}}</h3>
-            <p>{{c.user.email}}</p>
-            <p>{{c.user.username}}</p>
-        </div>
-        <div ng-show="c.user.level=='user'">
-            <h1>korisnik ovo vidi</h1>
-        </div>
-
-        <div ng-show="c.user.level=='admin'">
-            <h1>admin ovo vidi</h1>
+            <h3>Ime i prezime: {{c.user.imeKorisnik}} {{c.user.prezimeKorisnik}}</h3>
+            <p>Email: {{c.user.email}}</p>
+            <p>Username: {{c.user.username}}</p>
         </div>
 </div>

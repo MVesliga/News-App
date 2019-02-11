@@ -1,4 +1,4 @@
-module.exports=function(express,pool,jwt,secret){
+module.exports=function(express,pool,jwt,secret,bcrypt){
 
     const apiRouter = express.Router();
 
@@ -15,7 +15,9 @@ module.exports=function(express,pool,jwt,secret){
             conn.release();
             console.log('Log u apiju za login');
 
-            if (rows.length>0 && rows[0].password==req.body.credentials.password){
+            let compare = await bcrypt.compare(req.body.credentials.password,rows[0].password);
+            console.log(compare);
+            if (compare){
 
                 const token = jwt.sign({
                     username:rows[0].username,
@@ -45,12 +47,14 @@ module.exports=function(express,pool,jwt,secret){
     });
 
     apiRouter.route('/register').post(async function(req,res){
+        let hash = await bcrypt.hash(req.body.user.password, 10);
+
         const user = {
             imeKorisnik:req.body.user.ime,
             prezimeKorisnik:req.body.user.prezime,
             email:req.body.user.email,
             username:req.body.user.username,
-            password:req.body.user.password
+            password:hash
         }
 
         try{
@@ -82,14 +86,13 @@ module.exports=function(express,pool,jwt,secret){
         }
     }).post(async function(req,res){
         const vijest = {
-            prioritet: req.body.vijest.prioritet,
-            naslov: req.body.vijest.naslov,
-            podnaslov: req.body.vijest.podnaslov,
-            sadrzajVijest: req.body.vijest.sadrzaj,
-            idKategorije: req.body.vijest.kategorija,
-            idPotkategorije: req.body.vijest.potkategorija,
-            datumObjavljivanja: req.body.vijest.datumObjavljivanja,
-            imgUrl: req.body.vijest.urlSlike
+            prioritet: req.body.podatak.prioritet,
+            naslov: req.body.podatak.naslov,
+            podnaslov: req.body.podatak.podnaslov,
+            sadrzajVijest: req.body.podatak.sadrzaj,
+            idKategorije: req.body.podatak.kategorija,
+            datumObjavljivanja: req.body.podatak.datumObjavljivanja,
+            imgUrl: req.body.podatak.urlSlike
         }
 
         try{
@@ -105,14 +108,13 @@ module.exports=function(express,pool,jwt,secret){
     }).put(async function(req,res){
 
         const vijest = {
-            prioritet: req.body.vijest.prioritet,
-            naslov: req.body.vijest.naslov,
-            podnaslov: req.body.vijest.podnaslov,
-            sadrzajVijest: req.body.vijest.sadrzaj,
-            idKategorije: req.body.vijest.kategorija,
-            idPotkategorije: req.body.vijest.potkategorija,
-            datumObjavljivanja: req.body.vijest.datumObjavljivanja,
-            imgUrl: req.body.vijest.urlSlike
+            prioritet: req.body.podatak.prioritet,
+            naslov: req.body.podatak.naslov,
+            podnaslov: req.body.podatak.podnaslov,
+            sadrzajVijest: req.body.podatak.sadrzaj,
+            idKategorije: req.body.podatak.kategorija,
+            datumObjavljivanja: req.body.podatak.datumObjavljivanja,
+            imgUrl: req.body.podatak.urlSlike
         }
 
         try {
@@ -123,6 +125,20 @@ module.exports=function(express,pool,jwt,secret){
             console.log(q);
         } catch (e){
             res.json({ status: 'NOT OK' });
+        }
+    });
+
+    apiRouter.route('/news/:kategorija').get(async function(req,res){
+        try {
+            let conn = await pool.getConnection();
+            let rows = await conn.query('SELECT * FROM vijest JOIN kategorije ON vijest.idKategorije = kategorije.id WHERE kategorije.nazivKategorije=?',req.params.kategorija);
+            conn.release();
+            res.json({ status: 'OK', vijesti:rows });
+
+        } catch (e){
+            console.log(e);
+            return res.json({"code" : 100, "status" : "Error with query"});
+
         }
     });
 
@@ -138,8 +154,19 @@ module.exports=function(express,pool,jwt,secret){
         } catch (e){
             res.json({ status: 'NOT OK' });
         }
+    });
 
+    apiRouter.route('/news/:kategorija').get(async function(req,res){
+        try {
 
+            let conn = await pool.getConnection();
+            let q = await conn.query('SELECT * FROM vijest WHERE id = ?', req.params.id);
+            conn.release();
+            res.json({ status: 'OK', affectedRows :q.affectedRows });
+
+        } catch (e){
+            res.json({ status: 'NOT OK' });
+        }
     });
 
     apiRouter.route('/users/:id').get(async function(req,res){
@@ -156,6 +183,39 @@ module.exports=function(express,pool,jwt,secret){
 
         }
         
+    });
+    apiRouter.route('/comments').post(async function(req,res){
+        const komentar = {
+            idKorisnik: req.body.podatak.idKorisnik,
+            idVijest: req.body.podatak.idVijest,
+           sadrzajKomentar: req.body.podatak.sadrzajKomentar,
+           datumObjavljivanja: req.body.podatak.datumObjavljivanja
+        }
+
+        try{
+            let conn = await pool.getConnection();
+            let q = await conn.query('INSERT INTO komentar SET ?',komentar);
+            conn.release();
+            res.json({status:'OK',insertId:q.insertId});
+        }
+        catch(e){
+            console.log(e);
+            res.json({status:'NOT OK'});
+        }
+    });
+
+    apiRouter.route('/comments/:idVijest').get(async function(req,res){
+        try {
+            let conn = await pool.getConnection();
+            let rows = await conn.query('SELECT korisnici.username,komentar.* FROM komentar JOIN korisnici ON komentar.idKorisnik = korisnici.id WHERE idVijest=?',req.params.idVijest);
+            conn.release();
+            res.json({ status: 'OK', komentari:rows});
+
+        } catch (e){
+            console.log(e);
+            return res.json({"code" : 100, "status" : "Error with query"});
+
+        }
     });
 
     return apiRouter;

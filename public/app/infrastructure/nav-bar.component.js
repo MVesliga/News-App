@@ -7,9 +7,9 @@ newsApp.component('navBar', {
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a ui-sref="home">HOME</a></li>
-                    <li><a ui-sref="news">NEWS</a></li>
-                    <li><a ui-sref="sport">SPORT</a></li>
-                    <li><a ui-sref="tech">TECH</a></li>
+                    <li><a ui-sref="news({kategorija:'news'})">NEWS</a></li>
+                    <li><a ui-sref="sport({kategorija:'sport'})">SPORT</a></li>
+                    <li><a ui-sref="tech({kategorija:'tech'})">TECH</a></li>
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
