@@ -1,0 +1,38 @@
+newsApp.config(function($stateProvider,$urlRouterProvider){
+    $stateProvider.state('home',{
+        url:'/',
+        component:'home'   
+    }).state('news',{
+        url:'/:kategorija',
+        component:'news'
+    }).state('sport',{
+        url:'/:kategorija',
+        component:'sport'
+    }).state('tech',{
+        url:'/:kategorija',
+        component:'tech'
+    }).state('search',{
+        url:'/search',
+        component:'search'
+    }).state('login',{
+        url:'/login',
+        component:'login'
+    }).state('register',{
+        url:'/register',
+        component:'register'
+    }).state('user-detail',{
+        url:'/users/:id',
+        component:'userDetail'
+    }).state('news-list',{
+        url:'/news',
+        component:'newsList'
+    }).state('add-news',{
+        url:'/addNews',
+        component:'addNews'
+    }).state('news-detail',{
+        url:'/:newsTitle',
+        component:'newsDetail'
+    });
+
+    $urlRouterProvider.otherwise('/');
+});

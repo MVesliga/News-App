@@ -1,0 +1,63 @@
+<div class="container forma">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Dodaj vijest</h3>
+                    </div>
+                    <div class="panel-body">
+                    <form name="unos" ng-submit="c.onSubmit()" novalidate>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.prioritet.$invalid }">
+                            <label>Prioritet:</label>
+                            <select name="prioritet" ng-model="c.vijest.prioritet" required>
+                                    <option value="" selected disabled>Odaberi:</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                            </select>
+                            <p ng-show="unos.prioritet.$invalid" class="help-block">Odaberite prioritet!</p>
+                        </fieldset>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.kategorija.$invalid}">
+                            <label>Kategorija:</label>
+                            <select name="kategorija" ng-model="c.vijest.kategorija" required>
+                                    <option value="" selected disabled>Odaberi:</option>
+                                    <option value="1">News</option>
+                                    <option value="2">Sport</option>
+                                    <option value="3">Tech</option>
+                            </select>
+                            <p ng-show="unos.kategorija.$invalid" class="help-block">Odaberite kategoriju!</p>
+                        </fieldset>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.urlSlike.$invalid && !unos.urlSlike.$pristine }">
+                                <label>Url slike:</label>
+                                <input name="urlSlike" placeholder="Url slike" class="form-control" type="text" ng-model="c.vijest.urlSlike" required/>
+                                <p ng-show="unos.urlSlike.$invalid && !unos.urlSlike.$pristine" class="help-block">Unesite url urlSlike!</p>
+                            </fieldset>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.naslov.$invalid && !unos.naslov.$pristine }">
+                            <label>Naslov:</label>
+                            <input name="naslov" placeholder="Naslov" class="form-control" type="text" ng-model="c.vijest.naslov" required/>
+                            <p ng-show="unos.naslov.$invalid && !unos.naslov.$pristine" class="help-block">Unesite naslov!</p>
+                        </fieldset>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.podnaslov.$invalid && !unos.podnaslov.$pristine }">
+                                <label>Podnaslov:</label>
+                                <input name="podnaslov" placeholder="Podnaslov" class="form-control" type="text" ng-model="c.vijest.podnaslov" required/>
+                                <p ng-show="unos.podnaslov.$invalid && !unos.podnaslov.$pristine" class="help-block">Unesite podnaslov!</p>
+                        </fieldset>
+                        <fieldset class="form-group" ng-class="{ 'has-error' : unos.sadrzaj.$invalid && !unos.sadrzaj.$pristine }">
+                            <label>Sadržaj:</label><br>
+                            <textarea name="sadrzaj" rows="10" cols="43" ng-model="c.vijest.sadrzaj">
+                                Unesite sadržaj.
+                            </textarea>
+                            <p ng-show="unos.sadrzaj.$invalid && !unos.sadrzaj.$pristine" class="help-block">Unesite sadrzaj!</p>
+                        </fieldset>
+
+                        <button type="submit" class="btn btn-primary center-block"  ng-show="c.mode=='add'" ng-disabled="unos.$invalid" ng-click="add();">Dodaj</button>
+                        <button type="submit" class="btn btn-success center-block" ng-show="c.mode=='edit'" ng-disabled="unos.$invalid" ng-click="edit();">Edit</button>
+                    </form>
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>

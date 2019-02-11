@@ -1,0 +1,25 @@
+<div class="container">
+    <img src="{{c.vijest.imgUrl}}" alt="slika" height="400" width="100%"/>
+    <hr>
+    <h1>{{c.vijest.naslov}}</h1>
+    <h2>{{c.vijest.podnaslov}}</h2>
+    <p>{{c.vijest.sadrzajVijest}}</p>
+    <p>Objavljeno: {{c.vijest.datumObjavljivanja | date: 'dd-MM-yyyy HH:mm:ss'}}</p>
+    <hr>
+    <br><br>
+    <div>
+        <h3>Komentari: ({{c.komentari.length}})</h3>
+        <div class="well" ng-repeat="komentar in c.komentari">
+            <b> {{komentar.username}}</b>
+            <hr>
+            <p>{{komentar.sadrzajKomentar}}</p>
+            <p>at: {{komentar.datumObjavljivanja | date: 'dd-MM-yyyy HH:mm:ss'}}</p>
+        </div>
+    </div>
+    <br><br>
+    <div ng-show="c.authenticated" style="margin-bottom:100px;">
+        <hr>
+        <button class="btn btn-primary" ng-click="c.mode='add'">Dodaj komentar</button>
+        <add-comment korisnik='c.user.id' vijest="c.vijest.id" mode='c.mode' ng-show="c.mode=='add'"></add-comment>
+    </div>
+</div>

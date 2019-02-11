@@ -1,0 +1,49 @@
+<div class="container forma">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Register</h3>
+                </div>
+                <div class="panel-body">
+                <form name="unos" ng-submit="c.onSubmit($event, unos)" novalidate>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.ime.$invalid && !unos.ime.$pristine }">
+                        <label>Ime:</label>
+                        <input name="ime" placeholder="Ime" class="form-control" type="text" ng-model="c.user.ime" required/>
+                        <p ng-show="unos.ime.$invalid && !unos.ime.$pristine" class="help-block">Unesite ime!</p>
+                    </fieldset>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.prezime.$invalid && !unos.prezime.$pristine }">
+                        <label>Prezime:</label>
+                        <input name="prezime" placeholder="Prezime" class="form-control" type="text" ng-model="c.user.prezime" required/>
+                        <p ng-show="unos.prezime.$invalid && !unos.prezime.$pristine" class="help-block">Unesite prezime!</p>
+                    </fieldset>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.email.$invalid && !unos.email.$pristine }">
+                        <label>Email:</label>
+                        <input name="email" placeholder="Email" class="form-control" type="email" ng-model="c.user.email" required/>
+                        <p ng-show="unos.email.$invalid && !unos.email.$pristine" class="help-block">Unesite email!</p>
+                    </fieldset>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.username.$invalid && !unos.username.$pristine }">
+                        <label>Username:</label>
+                        <input name="username" placeholder="Username" class="form-control" type="text" ng-model="c.user.username" required/>
+                        <p ng-show="unos.username.$invalid && !unos.username.$pristine" class="help-block">Unesite username!</p>
+                    </fieldset>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.password.$invalid && !unos.password.$pristine }">
+                        <label>Password:</label>
+                        <input name="password" placeholder="Password" class="form-control" type="password" ng-model="c.user.password" ng-minlength="3" required/>
+                        <p ng-show="unos.password.$invalid && !unos.password.$pristine" class="help-block">Unesite password!</p>
+                    </fieldset>
+                    <fieldset class="form-group" ng-class="{ 'has-error' : unos.rPassword.$invalid && !unos.rPassword.$pristine }">
+                        <label>Repeat Password:</label>
+                        <input name="rPassword" placeholder="Repeat Password" class="form-control" type="password" ng-model="c.user.rPassword"ng-minlength="3" required/>
+                        
+                    </fieldset>
+
+                    <div ng-show="c.errorMsg.length > 0" class="alert alert-danger">{{c.errorMsg}}</div>
+                <button type="submit" class="btn btn-primary center-block" ng-disabled="unos.$invalid">Register</button>
+                </form>
+                
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
